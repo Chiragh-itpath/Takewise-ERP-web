@@ -31,8 +31,8 @@ export const users: MockUser[] = [
     ],
   },
   {
-    id: 'u-acme-admin',
-    email: 'admin@acme.test',
+    id: 'u-user',
+    email: 'user@acme.test',
     fullName: 'Acme Admin',
     password: DEMO_PASSWORD,
     memberships: [{ tenant: acme, roles: ['viewer'], permissions: ['customers.read', 'customers.write'] }],
