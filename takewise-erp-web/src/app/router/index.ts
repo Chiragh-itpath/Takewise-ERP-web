@@ -47,6 +47,13 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/modules/customers/views/CustomerListView.vue'),
         meta: { permissions: ['customers.read'] },
       },
+      // Settings
+      {
+        path: 'settings',
+        name: 'settings',
+        component: () => import('@/modules/settings/views/SettingsView.vue'),
+        meta: { permissions: ['settings.manage'] },
+      },
     ],
   },
 

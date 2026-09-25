@@ -13,3 +13,4 @@ export const createCustomerSchema = z.object({
 })
 
 export type CreateCustomerForm = z.infer<typeof createCustomerSchema>
+export const updateCustomerSchema = createCustomerSchema.omit({ email: true })

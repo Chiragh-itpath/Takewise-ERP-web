@@ -2,6 +2,7 @@ import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
 import { authApi } from './auth.api'
 import type { LoginRequest, MeResponse, TenantMembership, User } from './auth.types'
+import type { Tenant } from '@/core/tenant/tenant.types'
 
 export const useAuthStore = defineStore('auth', () => {
   const user = ref<User | null>(null)
@@ -18,16 +19,16 @@ export const useAuthStore = defineStore('auth', () => {
 
   // Restores the session on page load (cookie-based, so we just ask the server)
   async function init() {
-  if (initialized.value) return
-  console.log('[auth] init called') // temporary
-  try {
-    setSession(await authApi.me())
-  } catch {
-    // Not signed in
-  } finally {
-    initialized.value = true
+    if (initialized.value) return
+    console.log('[auth] init called') // temporary
+    try {
+      setSession(await authApi.me())
+    } catch {
+      // Not signed in
+    } finally {
+      initialized.value = true
+    }
   }
-}
 
   async function login(payload: LoginRequest) {
     setSession(await authApi.login(payload))
@@ -46,6 +47,12 @@ export const useAuthStore = defineStore('auth', () => {
     return memberships.value.find((m) => m.tenant.slug === slug) ?? null
   }
 
+  function updateTenant(updated: Tenant) {
+    memberships.value = memberships.value.map((m) =>
+      m.tenant.id === updated.id ? { ...m, tenant: updated } : m,
+    )
+  }
+
   return {
     user,
     memberships,
@@ -56,5 +63,6 @@ export const useAuthStore = defineStore('auth', () => {
     login,
     logout,
     membershipFor,
+    updateTenant,
   }
 })
