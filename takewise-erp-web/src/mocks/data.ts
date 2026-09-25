@@ -1,6 +1,5 @@
 import type { Tenant } from '@/core/tenant/tenant.types'
 import type { TenantMembership, User } from '@/core/auth/auth.types'
-import type { Customer } from '@/modules/customers/customers.types'
 
 // ---- Tenants (fake companies) ----
 const acme: Tenant = { id: 't-acme', slug: 'acme', name: 'Acme Manufacturing (demo)' }
@@ -32,11 +31,11 @@ export const users: MockUser[] = [
     ],
   },
   {
-    id: 'u-viewer',
-    email: 'viewer@demo.test',
-    fullName: 'Demo Viewer',
+    id: 'u-acme-admin',
+    email: 'admin@acme.test',
+    fullName: 'Acme Admin',
     password: DEMO_PASSWORD,
-    memberships: [{ tenant: acme, roles: ['viewer'], permissions: ['customers.read'] }],
+    memberships: [{ tenant: acme, roles: ['viewer'], permissions: ['customers.read', 'customers.write'] }],
   },
 ]
 

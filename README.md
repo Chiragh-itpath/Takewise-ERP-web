@@ -2,6 +2,32 @@
 
 Frontend foundation for a multi-tenant ERP. It provides authentication, tenant-aware routing, permission-aware navigation, an API client, and MSW-backed demo data without implementing real accounts or business workflows.
 
+## Submission
+
+**Public GitHub repository:** Replace the placeholder with the final public repository URL before submission:
+
+`https://github.com/your-github-username/takewise-erp-web`
+
+### Choices and Scope
+
+- **Vue 3, Vite, and TypeScript** provide a lightweight, typed frontend foundation that another developer can install and extend quickly.
+- **Vue Router** handles public and tenant-scoped routes. Tenant switching uses SPA navigation rather than a full-page reload.
+- **Pinia** stores the authenticated user, memberships, and active tenant. **Axios** centralizes API calls, credentials, tenant headers, session refresh, and common error handling.
+- **PrimeVue, Tailwind CSS, and PrimeIcons** provide the initial UI building blocks without creating a bespoke component system before the ERP workflows are known.
+- **Zod** validates login input at the feature boundary.
+- **Mock Service Worker (MSW)** supplies realistic local demo data and simulates server-side authentication, membership checks, permissions, and tenant isolation. The mock API only returns customer records belonging to the active tenant.
+- **ESLint, Oxlint, Prettier, TypeScript, and Vue TSC** provide the baseline code-quality and validation tooling.
+- **GitHub Copilot** was used as an AI coding assistant for repository setup, implementation, documentation, and validation. All generated code was reviewed against the application requirements and should be explainable by the candidate.
+
+The following were intentionally left out because this is a frontend foundation rather than a production ERP:
+
+- No real backend, database, user accounts, HTTP-only production session, or OAuth provider.
+- No real password reset flow. The routes and mock endpoints establish the API contract only.
+- No create, edit, delete, billing, inventory, reporting, or other full ERP workflows.
+- No production deployment configuration or CI pipeline, since the submission target and hosting provider were not specified.
+
+The mock credentials and local run instructions are documented below. The implementation is intentionally structured so the mock handlers can later be replaced by the real server APIs without changing the feature screens.
+
 ## Recommended IDE Setup
 
 [VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
@@ -42,7 +68,7 @@ Open the URL printed by Vite, then use one of these mock accounts:
 | Email | Password | Access |
 | --- | --- | --- |
 | `admin@demo.test` | `Demo@123` | Acme Manufacturing and Globex Trading; customer read/write and settings permission in Acme |
-| `viewer@demo.test` | `Demo@123` | Acme Manufacturing; customer read-only |
+| `admin@acme.test` | `Demo@123` | Acme Manufacturing; customer read/write |
 
 Switching companies changes the SPA route and sends the selected tenant ID in `X-Tenant-ID`. The mock server verifies both the signed-in user's membership and that header before returning customer records, so each company sees only its own sample data.
 

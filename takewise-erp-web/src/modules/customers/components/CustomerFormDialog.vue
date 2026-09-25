@@ -103,7 +103,7 @@ async function save() {
       <Message v-if="formError" severity="error">{{ formError }}</Message>
 
       <div class="flex flex-col gap-1.5">
-        <label for="customer-name" class="text-sm font-medium">Company name</label>
+        <label for="customer-name" class="text-sm font-medium">Customer name</label>
         <InputText id="customer-name" v-model="form.name" :invalid="!!fieldErrors.name" fluid />
         <small v-if="fieldErrors.name" class="text-sm text-red-600">{{ fieldErrors.name }}</small>
       </div>
