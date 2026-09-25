@@ -12,12 +12,21 @@
     "lint": "run-s \"lint:*\"",
     "lint:oxlint": "oxlint . --fix",
     "lint:eslint": "eslint . --fix --cache",
-    "format": "prettier --write --experimental-cli src/"
+    "format": "prettier --write --experimental-cli src/",
+    "format:check": "prettier --check --experimental-cli src/"
   },
   "dependencies": {
+    "@primeuix/themes": "^1.2.5",
+    "@tailwindcss/vite": "^4.3.3",
+    "axios": "^1.20.0",
     "pinia": "^4.0.3",
+    "primeicons": "^8.0.2",
+    "primevue": "^4.5.5",
+    "tailwindcss": "^4.3.3",
+    "tailwindcss-primeui": "^0.6.1",
     "vue": "^3.5.42",
-    "vue-router": "^5.3.1"
+    "vue-router": "^5.3.1",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
     "@tsconfig/node24": "^24.0.5",
@@ -30,6 +39,7 @@
     "eslint-plugin-oxlint": "~1.82.0",
     "eslint-plugin-vue": "~10.11.0",
     "jiti": "^2.7.0",
+    "msw": "^2.15.0",
     "npm-run-all2": "^9.0.3",
     "oxlint": "~1.82.0",
     "prettier": "3.9.6",
@@ -41,5 +51,10 @@
   },
   "engines": {
     "node": "^22.18.0 || >=24.12.0"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }

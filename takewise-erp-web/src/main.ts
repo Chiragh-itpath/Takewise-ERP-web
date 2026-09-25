@@ -1,14 +1,20 @@
-import './assets/main.css'
-
 import { createApp } from 'vue'
-import { createPinia } from 'pinia'
-
 import App from './App.vue'
-import router from './router'
+import { registerPlugins } from '@/app/plugins'
+import { env } from '@/core/config/env'
 
-const app = createApp(App)
+import 'primeicons/primeicons.css'
+import '@/shared/styles/main.css'
 
-app.use(createPinia())
-app.use(router)
+async function enableMocking() {
+  if (!env.useMocks) return
+  // Dynamic import: MSW is never bundled when mocks are off
+  const { worker } = await import('@/mocks/browser')
+  await worker.start({ onUnhandledRequest: 'bypass' })
+}
 
-app.mount('#app')
+enableMocking().then(() => {
+  const app = createApp(App)
+  registerPlugins(app)
+  app.mount('#app')
+})
