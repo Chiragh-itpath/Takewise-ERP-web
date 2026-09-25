@@ -9,6 +9,7 @@ import { env } from '@/core/config/env'
 import { MOCK_RESET_TOKEN } from '@/mocks/constants'
 import { toFieldErrors } from '@/shared/utils/zod'
 import { forgotPasswordSchema } from '../auth.schemas'
+import { users } from '../../../mocks/data'
 
 const email = ref('')
 const loading = ref(false)
@@ -27,6 +28,15 @@ async function submit() {
 
   loading.value = true
   try {
+    const user = users.find(
+      (u) => u.email === email.value?.trim().toLowerCase()
+    )
+    if(!user)
+    {
+      error.value = "Email not found"
+      loading.value = false
+      return
+    }
     await authApi.forgotPassword(result.data)
     sentTo.value = result.data.email
   } catch (e) {

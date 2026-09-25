@@ -13,11 +13,12 @@ Frontend foundation for a multi-tenant ERP. It provides authentication, tenant-a
 - **Vue 3, Vite, and TypeScript** provide a lightweight, typed frontend foundation that another developer can install and extend quickly.
 - **Vue Router** handles public and tenant-scoped routes. Tenant switching uses SPA navigation rather than a full-page reload.
 - **Pinia** stores the authenticated user, memberships, and active tenant. **Axios** centralizes API calls, credentials, tenant headers, session refresh, and common error handling.
+- Loading and request errors are handled in the individual Vue views for this small demo, keeping each screen's state explicit. As the application grows, these concerns can be moved into shared request/interceptor infrastructure and reusable UI components.
 - **PrimeVue, Tailwind CSS, and PrimeIcons** provide the initial UI building blocks without creating a bespoke component system before the ERP workflows are known.
-- **Zod** validates login input at the feature boundary.
-- **Mock Service Worker (MSW)** supplies realistic local demo data and simulates server-side authentication, membership checks, permissions, and tenant isolation. The mock API only returns customer records belonging to the active tenant.
+- **Zod** provides basic login validation at the feature boundary. A shared, common validation layer for all future modules was intentionally left out for this demo; it can be introduced when the backend contracts and ERP workflows are finalized.
+- **Mock Service Worker (MSW)** supplies realistic local demo data and simulates server-side authentication, membership checks, permissions, and tenant isolation. The tenant slug in the URL and the `X-Tenant-ID` header are used to identify the active company because the demo has no real backend tenant context. In production, tenant identity and tenant routing can be maintained and enforced by the backend APIs and authenticated session.
 - **ESLint, Oxlint, Prettier, TypeScript, and Vue TSC** provide the baseline code-quality and validation tooling.
-- **GitHub Copilot** was used as an AI coding assistant for repository setup, implementation, documentation, and validation. All generated code was reviewed against the application requirements and should be explainable by the candidate.
+- **Cluade code** was used as an AI coding assistant for repository setup, implementation, documentation, and validation. All generated code was reviewed against the application requirements and should be explainable by the candidate.
 
 The following were intentionally left out because this is a frontend foundation rather than a production ERP:
 
