@@ -61,7 +61,7 @@ Open the URL printed by Vite, then use one of these mock accounts:
 
 | Email | Password | Access |
 | --- | --- | --- |
-| `admin@demo.test` | `Demo@123` | Acme Manufacturing and Globex Trading; customer read/write and settings permission in Acme |
+| `admin@demo.test` | `Demo@123` | Acme Manufacturing: customer read/write and settings permission; Globex Trading: customer read-only |
 | `user@acme.test` | `Demo@123` | Acme Manufacturing; customer read/write |
 
 Switching companies changes the SPA route and sends the selected tenant ID in `X-Tenant-ID`. The mock server verifies both the signed-in user's membership and that header before returning customer records, so each company sees only its own sample data.
